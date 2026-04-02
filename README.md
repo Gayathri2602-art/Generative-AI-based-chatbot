@@ -44,7 +44,6 @@ Sentence Transformers
 
 🌐 Flask web interface
 
-
 ----
 
 How It Works
