@@ -1,6 +1,8 @@
 RAG Chatbot (Llama 2)
 
-A Retrieval-Augmented Generation (RAG) chatbot that retrieves relevant information from documents and generates accurate, context-aware responses using Llama 2.
+A Retrieval-Augmented Generation (RAG) chatbot built using LangChain, Llama 3.2, and Pinecone for semantic document retrieval and context-aware question answering.
+
+This project demonstrates how to build a document-based AI assistant that retrieves relevant information from a knowledge source and generates grounded responses using a large language model.
 
 ----
 
