@@ -1,5 +1,5 @@
-ctransformers==0.2.5
-sentence-transformers==2.2.2
-pinecone
-langchain==0.0.255
-flask
+langchain==0.2.17
+langchain-community==0.2.17
+langchain-huggingface
+langchain-ollama
+flask==3.0.3
