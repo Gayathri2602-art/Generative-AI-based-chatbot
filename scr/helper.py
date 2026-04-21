@@ -10,8 +10,24 @@ def load_pdf(data_path: str):
     return documents
 
 
+<<<<<<< HEAD
 # --- 2. Split documents ---
 def text_split(documents, chunk_size=500, chunk_overlap=50):  
+=======
+# --- 2. Split documents into smaller chunks ---
+def text_split(documents, chunk_size=500, chunk_overlap=100):
+    """
+    Splits the loaded documents into smaller chunks for embedding.
+    
+    Args:
+        documents (List[Document]): List of langchain Document objects.
+        chunk_size (int): Max characters per chunk.
+        chunk_overlap (int): Number of overlapping characters between chunks.
+        
+    Returns:
+        List[Document]: List of chunked documents.
+    """
+>>>>>>> 141307d5c4b62d7edba76edf097cf56c88ea9894
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap
