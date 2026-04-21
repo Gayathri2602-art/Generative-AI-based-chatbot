@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEDTIME - BUDDY</title>
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="top-header-bg">
+    <h1>BEDTIME - BUDDY</h1>
+</div>
+
+<div class="chat-container">
+    <div class="chat">
+        <div class="card">
+            <div class="card-header">
+                <div class="user_info">
+                    <span>Bedtime Story Assistant</span>
+                    <p>Ask questions from your story books 📚</p>
+                </div>
+            </div>
+            
+            <div id="chat-box" class="msg_card_body"></div>
+
+            <div class="card-footer">
+                <form id="messageForm" class="input-group">
+                    <input 
+                        type="text" 
+                        id="user-input" 
+                        class="form-control type_msg" 
+                        placeholder="Ask something from your book..." 
+                        required 
+                        autocomplete="off"
+                    >
+                    <div class="input-group-append">
+                        <button type="submit" class="input-group-text send_btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="developer-bubble">
+    <p><strong>Developed by:</strong> Gayathri V.R </p>
+    <p>RAG Chatbot • Pinecone • Phi3</p>
+</div>
+
+<script>
+$(document).ready(function () {
+
+    let isSending = false;
+
+    const BOT_IMG = "/static/pngtree-forest-fairies-girl-clipart-bundle-png-image_21081232.png";
+    const USER_IMG = "https://i.ibb.co/d5b84Xw/Untitled-design.png";
+
+    function getTime() {
+        const now = new Date();
+        return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function appendMessage(sender, text) {
+        const time = getTime();
+        const img = sender === 'user' ? USER_IMG : BOT_IMG;
+        const side = sender === 'user' ? 'justify-content-end' : 'justify-content-start';
+        const bubble = sender === 'user' ? 'msg_cotainer_send' : 'msg_cotainer';
+
+        const html = `
+        <div class="d-flex ${side} mb-4">
+            ${sender === 'bot' ? `<div class="img_cont_msg"><img src="${img}" class="rounded-circle user_img_msg"></div>` : ''}
+            
+            <div class="${bubble}">
+                ${text}
+                <span class="small d-block mt-1" style="color:rgba(0,0,0,0.5); font-size: 10px;">
+                    ${time}
+                </span>
+            </div>
+
+            ${sender === 'user' ? `<div class="img_cont_msg"><img src="${img}" class="rounded-circle user_img_msg"></div>` : ''}
+        </div>`;
+
+        $("#chat-box").append(html);
+        $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
+    }
+
+    function showLoading() {
+        const loadingHtml = `
+        <div id="temp-loading" class="d-flex justify-content-start mb-4">
+            <div class="img_cont_msg">
+                <img src="${BOT_IMG}" class="rounded-circle user_img_msg">
+            </div>
+            <div class="msg_cotainer" style="background-color: #e1e1e1;">
+                <div class="typing"><span></span><span></span><span></span></div>
+            </div>
+        </div>`;
+
+        $("#chat-box").append(loadingHtml);
+        $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
+    }
+
+    $("#messageForm").on("submit", function (event) {
+        event.preventDefault();
+
+        if (isSending) return;
+
+        let userMsg = $("#user-input").val().trim();
+        if (!userMsg) return;
+
+        isSending = true;
+
+        appendMessage('user', userMsg);
+        $("#user-input").val("");
+
+        showLoading();
+
+        $.ajax({
+            url: "/get",
+            type: "POST",
+            data: { msg: userMsg },
+
+            success: function (data) {
+                $("#temp-loading").remove();
+                appendMessage('bot', data);
+                isSending = false;
+            },
+
+            error: function () {
+                $("#temp-loading").remove();
+                appendMessage('bot', "⚠️ Something went wrong. Try again.");
+                isSending = false;
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
