@@ -17,7 +17,6 @@ load_dotenv()
 # ----------------------------
 # 1. Config (Use ENV or fallback)
 # ----------------------------
-# ----------------------------
 # CONFIG
 # ----------------------------
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
