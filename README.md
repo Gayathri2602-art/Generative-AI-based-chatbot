@@ -1,53 +1,119 @@
-RAG Chatbot (Llama 2)
+🌙 Bed-Time Buddy — Intelligent RAG-Based Storytelling Chatbot
+🧠 Overview
 
-A Retrieval-Augmented Generation (RAG) chatbot built using LangChain, Llama 3.2, and Pinecone for semantic document retrieval and context-aware question answering.
+Bed-Time Buddy is a Retrieval-Augmented Generation (RAG) powered chatbot designed to deliver context-aware bedtime stories.
 
-This project demonstrates how to build a document-based AI assistant that retrieves relevant information from a knowledge source and generates grounded responses using a large language model.
+Retrieves relevant story segments from a curated dataset
+Uses controlled prompting to ensure grounded responses
+Generates safe, simple, and child-friendly storytelling answers
+🎥 Demo
 
-----
 
-🚀 Overview
 
-This project builds a document-based AI assistant:
+🖥️ Chat Interface
 
-Documents are embedded and stored in Pinecone
+💬 Sample Interaction
+User: Tell me a story about a brave rabbit
 
-Relevant content is retrieved based on user queries
-
-Context is passed to Llama 2
-
-The chatbot generates grounded responses
-
----
-
+Bot: Once there was a small rabbit who lived near a quiet forest...
+✨ Features
+📚 RAG-based story generation
+🔍 Semantic search using vector database
+🧠 Context-aware responses
+🎯 Controlled prompt to reduce hallucinations
+⚡ Fast retrieval pipeline
+💬 Interactive chat UI
+🏗️ Architecture
+User Query
+   ↓
+Embeddings (MiniLM)
+   ↓
+Pinecone Vector Search
+   ↓
+Top-K Chunks
+   ↓
+Prompt Engineering
+   ↓
+Ollama (phi3)
+   ↓
+Final Response
+📂 Project Structure
+Bed-Time-Buddy/
+│
+├── Data/
+│   └── 365_bedtime_stories.pdf
+│
+├── Research/
+│   └── trials.ipynb
+│
+├── src/
+│   ├── chatbot.py
+│   ├── helper.py
+│   └── prompt.py
+│
+├── static/
+│   ├── styles.css
+│   └── *.png
+│
+├── templates/
+│   └── chat.html
+│
+├── app.py
+├── store_index.py
+├── requirements.txt
+└── README.md
+⚙️ How It Works
+Load and process PDF stories
+Split text into chunks
+Convert chunks into embeddings
+Store embeddings in Pinecone
+Retrieve relevant chunks during query
+Generate response using LLM
 🛠️ Tech Stack
-
 Python
-
-LangChain
-
 Flask
-
-Llama 2
-
+LangChain
 Pinecone
+HuggingFace Embeddings
+Ollama (phi3)
+HTML + CSS
+🚀 Setup Instructions
+1. Clone Repository
+git clone https://github.com/your-username/Bed-Time-Buddy.git
+cd Bed-Time-Buddy
+2. Create Virtual Environment
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+3. Install Dependencies
+pip install -r requirements.txt
+4. Add Environment Variables
 
-Sentence Transformers
+Create a .env file:
 
----
-
-📌 Features
-
-🔍 Semantic search with Pinecone
-
-🤖 Context-aware responses
-
-📚 Document-based Q&A
-
-🌐 Flask web interface
-
-----
-
-How It Works
-
-User Query → Embeddings → Pinecone Retrieval → Llama 2 → Response
+PINECONE_API_KEY=your_api_key
+PINECONE_INDEX=bed-time-buddy
+5. Run Ollama Model
+ollama run phi3
+6. Create Vector Index
+python store_index.py
+7. Run Application
+python app.py
+8. Open in Browser
+http://localhost:5000
+🎯 Key Design Choices
+RAG Architecture → reduces hallucinations
+Pinecone → scalable vector search
+MiniLM Embeddings → fast and efficient
+Ollama (phi3) → local, cost-free inference
+Strict Prompting → controlled outputs
+⚠️ Known Issues
+Merge conflict present in helper.py
+Strict prompt may limit creativity
+No conversation memory yet
+🔮 Future Enhancements
+🎙️ Text-to-Speech storytelling
+🧠 Conversational memory
+🧒 Personalized stories
+🌍 Multi-language support
+📱 Mobile-friendly UI
+☁️ Cloud deployment
