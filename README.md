@@ -12,11 +12,10 @@
 
 ## 🎥 Demo
 
+<img width="1600" height="738" alt="image" src="https://github.com/user-attachments/assets/c2e0a284-c396-4ef5-a6c9-1dde91ba6fe4" />
+<img width="1600" height="735" alt="image" src="https://github.com/user-attachments/assets/ead8454c-df0e-4fe7-a0e1-cd45d5c79deb" />
+<img width="911" height="722" alt="image" src="https://github.com/user-attachments/assets/d9c97626-8b8c-4cf9-9d0a-e915394abac5" />
 
-
-### 🖥️ Chat Interface
-
-![Chat UI](static/demo.png)
 
 ---
 
